@@ -1,8 +1,6 @@
 "use strict";
 (() => {
   // background/index.ts
-  var HF_API_TOKEN = "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";
-  var HF_API_URL = "https://api-inference.huggingface.co/models/mistralai/Mistral-7B-Instruct-v0.2";
   chrome.runtime.onInstalled.addListener(() => {
     console.log("Real-Time Context extension installed");
   });
@@ -224,10 +222,10 @@
         );
         await Promise.all(companyPromises);
       }
-      const response = await fetch(HF_API_URL, {
+      const response = await fetch(process.env.HF_API_URL, {
         method: "POST",
         headers: {
-          "Authorization": `Bearer ${HF_API_TOKEN}`,
+          "Authorization": `Bearer ${process.env.HF_API_TOKEN}`,
           "Content-Type": "application/json"
         },
         body: JSON.stringify({
@@ -302,12 +300,10 @@ Provide helpful, current context for: "${text}" [/INST]</s>`,
                 </div>
               </div>
               <div class="company-summary">
+                <div class="market-cap">Market Cap: ${stockData.marketCap}</div>
                 <p>${summarySummary}</p>
               </div>
-              <div class="card-footer">
-                <span class="market-cap">Market Cap: ${stockData.marketCap}</span>
-                <span class="data-source">Data from Wikipedia</span>
-              </div>
+              <div class="card-footer">Data from Wikipedia</div>
             </div>`;
             } else {
               let summaryText = `Loading information about ${entity.name}...`;

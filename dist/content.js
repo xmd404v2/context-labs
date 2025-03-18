@@ -407,6 +407,16 @@
         overflow-y: auto;
       }
       
+      #real-time-context-extension .company-summary .market-cap {
+        font-size: 11px;
+        color: #a0aec0;
+        margin-bottom: 6px;
+      }
+      
+      #real-time-context-extension .company-summary p {
+        margin: 0;
+      }
+      
       #real-time-context-extension .stock-info {
         padding: 8px 12px;
         display: grid;
@@ -471,6 +481,7 @@
         color: #718096;
         background: rgba(0, 0, 0, 0.2);
         border-top: 1px solid rgba(255, 255, 255, 0.05);
+        text-align: center;
       }
       
       /* Light mode support */
@@ -526,8 +537,7 @@
           color: #64748b;
         }
         
-        #real-time-context-extension .market-cap,
-        #real-time-context-extension .data-source {
+        #real-time-context-extension .company-summary .market-cap {
           color: #64748b;
         }
         
