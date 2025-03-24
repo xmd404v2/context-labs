@@ -1,4 +1,4 @@
-# Real-Time Context Chrome Extension
+# ContextRT Chrome Extension
 
 A Chrome extension that listens to what you're typing in any text field and provides real-time context about the content using AI.
 

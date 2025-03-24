@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Trending Context Dashboard</title>
+  <style>
+    :root {
+      --primary-color: #60a5fa;
+      --primary-hover: #3b82f6;
+      --text-color: #333;
+      --text-secondary: #555;
+      --bg-color: #ffffff;
+      --card-bg: #f9fafb;
+      --border-color: rgba(0, 0, 0, 0.1);
+      --shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --primary-color: #60a5fa;
+        --primary-hover: #3b82f6;
+        --text-color: #e5e7eb;
+        --text-secondary: #d1d5db;
+        --bg-color: #1f2937;
+        --card-bg: #111827;
+        --border-color: rgba(255, 255, 255, 0.1);
+        --shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+      }
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      margin: 0;
+      padding: 0;
+      line-height: 1.5;
+    }
+
+    .container {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 2rem;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 2rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .logo img {
+      width: 48px;
+      height: 48px;
+    }
+
+    .logo h1 {
+      font-size: 1.8rem;
+      margin: 0;
+      color: var(--primary-color);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 1.5rem;
+    }
+
+    .nav-link {
+      color: var(--text-color);
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+
+    .nav-link:hover {
+      color: var(--primary-color);
+    }
+
+    .hero {
+      padding: 3rem 0;
+      text-align: center;
+    }
+
+    .hero h2 {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+      background: linear-gradient(90deg, #60a5fa, #3b82f6);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      text-fill-color: transparent;
+    }
+
+    .hero p {
+      font-size: 1.2rem;
+      max-width: 800px;
+      margin: 0 auto 2rem;
+      color: var(--text-secondary);
+    }
+
+    .cta-button {
+      display: inline-block;
+      background-color: var(--primary-color);
+      color: white;
+      border: none;
+      padding: 0.8rem 1.5rem;
+      border-radius: 6px;
+      font-weight: 600;
+      font-size: 1rem;
+      cursor: pointer;
+      text-decoration: none;
+      transition: background-color 0.2s;
+    }
+
+    .cta-button:hover {
+      background-color: var(--primary-hover);
+    }
+
+    .features {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+      margin: 3rem 0;
+    }
+
+    .feature-card {
+      background-color: var(--card-bg);
+      border-radius: 12px;
+      padding: 1.5rem;
+      box-shadow: var(--shadow);
+      border: 1px solid var(--border-color);
+    }
+
+    .feature-card h3 {
+      color: var(--primary-color);
+      margin-top: 0;
+      font-size: 1.3rem;
+    }
+
+    .feature-card p {
+      color: var(--text-secondary);
+      margin-bottom: 0;
+    }
+
+    .feature-icon {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+      color: var(--primary-color);
+    }
+
+    .settings-section {
+      background-color: var(--card-bg);
+      border-radius: 12px;
+      padding: 2rem;
+      margin: 3rem 0;
+      box-shadow: var(--shadow);
+      border: 1px solid var(--border-color);
+    }
+
+    .settings-section h3 {
+      margin-top: 0;
+      color: var(--primary-color);
+    }
+
+    .settings-option {
+      margin-bottom: 1.5rem;
+    }
+
+    .settings-option label {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-weight: 500;
+    }
+
+    .settings-option input[type="checkbox"] {
+      margin-right: 0.5rem;
+    }
+
+    footer {
+      border-top: 1px solid var(--border-color);
+      padding-top: 2rem;
+      margin-top: 3rem;
+      text-align: center;
+      color: var(--text-secondary);
+    }
+
+    .social-links {
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem;
+      margin: 1rem 0;
+    }
+
+    .social-link {
+      color: var(--text-secondary);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .social-link:hover {
+      color: var(--primary-color);
+    }
+
+    /* Simple icons */
+    .icon {
+      font-family: system-ui;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="logo">
+        <img src="icon.png" alt="Trending Context Logo">
+        <h1>Trending Context</h1>
+      </div>
+      <div class="nav-links">
+        <a href="#features" class="nav-link">Features</a>
+        <a href="#settings" class="nav-link">Settings</a>
+        <a href="https://github.com/context-labs/trending-context" class="nav-link" target="_blank">GitHub</a>
+      </div>
+    </header>
+
+    <main>
+      <section class="hero">
+        <h2>Get Real-Time Trending Context</h2>
+        <p>
+          Enhance your browsing experience with instant, relevant information about what you're typing. 
+          Trending Context delivers the most current information, highlights trending topics, and provides valuable context with a focus on recency.
+        </p>
+        <a href="#" class="cta-button" id="try-extension">Try It Now</a>
+      </section>
+
+      <section class="features" id="features">
+        <div class="feature-card">
+          <div class="feature-icon">📈</div>
+          <h3>Current Information</h3>
+          <p>
+            Get the most up-to-date context with a strong bias for recent events and trending topics directly related to what you're typing.
+          </p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">🏢</div>
+          <h3>Company Information</h3>
+          <p>
+            Instantly view relevant stock information and Wikipedia summaries for mentioned companies, all within your browser.
+          </p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">👤</div>
+          <h3>Public Figure Details</h3>
+          <p>
+            Access Wikipedia summaries and relevant information about public figures when they're mentioned in your text.
+          </p>
+        </div>
+      </section>
+
+      <section class="settings-section" id="settings">
+        <h3>Extension Settings</h3>
+        <div class="settings-option">
+          <label>
+            <input type="checkbox" id="enable-extension" checked>
+            Enable Trending Context
+          </label>
+          <p>Turn the extension on or off globally</p>
+        </div>
+
+        <div class="settings-option">
+          <label>
+            <input type="checkbox" id="show-company-cards" checked>
+            Show Company Information Cards
+          </label>
+          <p>Display stock and Wikipedia information for mentioned companies</p>
+        </div>
+
+        <div class="settings-option">
+          <label>
+            <input type="checkbox" id="show-person-cards" checked>
+            Show Person Information Cards
+          </label>
+          <p>Display Wikipedia information for mentioned public figures</p>
+        </div>
+
+        <div class="settings-option">
+          <label>
+            <input type="checkbox" id="auto-display" checked>
+            Auto-Display Context
+          </label>
+          <p>Automatically show context while typing (disable to use a keyboard shortcut)</p>
+        </div>
+
+        <button class="cta-button" id="save-settings">Save Settings</button>
+      </section>
+    </main>
+
+    <footer>
+      <div class="social-links">
+        <a href="https://github.com/context-labs/trending-context" class="social-link" target="_blank">GitHub</a>
+        <a href="#" class="social-link">Privacy Policy</a>
+        <a href="#" class="social-link">Terms of Service</a>
+      </div>
+      <p>&copy; 2023 Trending Context. All rights reserved.</p>
+    </footer>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // Load saved settings
+      const settings = {
+        enableExtension: localStorage.getItem('enableExtension') !== 'false',
+        showCompanyCards: localStorage.getItem('showCompanyCards') !== 'false',
+        showPersonCards: localStorage.getItem('showPersonCards') !== 'false',
+        autoDisplay: localStorage.getItem('autoDisplay') !== 'false'
+      };
+
+      // Initialize checkboxes
+      document.getElementById('enable-extension').checked = settings.enableExtension;
+      document.getElementById('show-company-cards').checked = settings.showCompanyCards;
+      document.getElementById('show-person-cards').checked = settings.showPersonCards;
+      document.getElementById('auto-display').checked = settings.autoDisplay;
+
+      // Save settings
+      document.getElementById('save-settings').addEventListener('click', function() {
+        const enableExtension = document.getElementById('enable-extension').checked;
+        const showCompanyCards = document.getElementById('show-company-cards').checked;
+        const showPersonCards = document.getElementById('show-person-cards').checked;
+        const autoDisplay = document.getElementById('auto-display').checked;
+
+        localStorage.setItem('enableExtension', enableExtension);
+        localStorage.setItem('showCompanyCards', showCompanyCards);
+        localStorage.setItem('showPersonCards', showPersonCards);
+        localStorage.setItem('autoDisplay', autoDisplay);
+
+        // Send message to background script to update settings
+        if (chrome && chrome.runtime) {
+          chrome.runtime.sendMessage({
+            type: 'UPDATE_SETTINGS',
+            settings: {
+              enableExtension,
+              showCompanyCards,
+              showPersonCards,
+              autoDisplay
+            }
+          });
+        }
+
+        alert('Settings saved successfully!');
+      });
+
+      // Try it now button
+      document.getElementById('try-extension').addEventListener('click', function(e) {
+        e.preventDefault();
+        alert('To try Trending Context, simply start typing in any text field on any website!');
+      });
+    });
+  </script>
+</body>
+</html> 

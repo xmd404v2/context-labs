@@ -6,9 +6,9 @@ export default function Home() {
     <main className="flex min-h-screen flex-col items-center justify-center p-4">
       <Card className="w-full max-w-md">
         <CardHeader>
-          <CardTitle className="text-xl">Real-Time Context</CardTitle>
+          <CardTitle className="text-xl">ContextRT</CardTitle>
           <CardDescription>
-            Get AI-powered context for what you're typing
+            Get real-time context as you type.
           </CardDescription>
         </CardHeader>
         <CardContent>

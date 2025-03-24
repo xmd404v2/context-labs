@@ -1,4 +1,4 @@
-// Background script for Real-Time Context extension
+// Background script for ContextRT extension
 
 // Add Chrome API type definitions
 declare const chrome: {
@@ -9,7 +9,12 @@ declare const chrome: {
     onMessage: {
       addListener: (
         callback: (
-          message: { type: string; text?: string },
+          message: { type: string; text?: string; settings?: {
+            enableExtension: boolean;
+            showCompanyCards: boolean;
+            showPersonCards: boolean;
+            autoDisplay: boolean;
+          } },
           sender: any,
           sendResponse: (response: { success?: boolean; context?: string }) => void
         ) => boolean
@@ -17,9 +22,14 @@ declare const chrome: {
     };
   };
 };
+
+// Hugging Face API token
+const HF_API_TOKEN = "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";
+const HF_API_URL = "https://api-inference.huggingface.co/models/mistralai/Mistral-7B-Instruct-v0.2";
+
 // Listen for extension installation
 chrome.runtime.onInstalled.addListener(() => {
-  console.log('Real-Time Context extension installed');
+  console.log('ContextRT extension installed');
 });
 
 // Simple company detection (would be more sophisticated in a real implementation)
@@ -417,6 +427,18 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
       });
     
     return true; // Indicates we'll respond asynchronously
+  }
+  
+  // Handle settings update message from dashboard
+  if (message.type === 'UPDATE_SETTINGS') {
+    console.log('Received updated settings:', message.settings);
+    // Store settings in chrome.storage if needed or handle directly
+    // You could implement logic here to modify behavior based on settings
+    // For example, if message.settings.enableExtension is false, you could
+    // stop responding to GET_CONTEXT messages
+    
+    sendResponse({ success: true });
+    return true;
   }
   
   return true;

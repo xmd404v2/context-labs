@@ -1,8 +1,10 @@
 "use strict";
 (() => {
   // background/index.ts
+  var HF_API_TOKEN = "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";
+  var HF_API_URL = "https://api-inference.huggingface.co/models/mistralai/Mistral-7B-Instruct-v0.2";
   chrome.runtime.onInstalled.addListener(() => {
-    console.log("Real-Time Context extension installed");
+    console.log("ContextRT extension installed");
   });
   function detectCompany(text) {
     const detectedCompanies = [];
@@ -222,10 +224,10 @@
         );
         await Promise.all(companyPromises);
       }
-      const response = await fetch(process.env.HF_API_URL, {
+      const response = await fetch(HF_API_URL, {
         method: "POST",
         headers: {
-          "Authorization": `Bearer ${process.env.HF_API_TOKEN}`,
+          "Authorization": `Bearer ${HF_API_TOKEN}`,
           "Content-Type": "application/json"
         },
         body: JSON.stringify({
@@ -360,6 +362,11 @@ Provide helpful, current context for: "${text}" [/INST]</s>`,
           context: `We couldn't fetch context right now. You were typing about "${text.substring(0, 30)}..."`
         });
       });
+      return true;
+    }
+    if (message.type === "UPDATE_SETTINGS") {
+      console.log("Received updated settings:", message.settings);
+      sendResponse({ success: true });
       return true;
     }
     return true;

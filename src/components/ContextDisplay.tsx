@@ -31,7 +31,7 @@ const ContextDisplay: React.FC<ContextDisplayProps> = ({
     >
       <Card className="shadow-lg border-slate-200 bg-white dark:bg-slate-900">
         <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-          <CardTitle className="text-sm font-medium">Real-Time Context</CardTitle>
+          <CardTitle className="text-sm font-medium">ContextRT</CardTitle>
           <Button
             variant="ghost"
             size="icon"

@@ -666,7 +666,7 @@
     document.addEventListener("focus", handleFocus, true);
     document.addEventListener("blur", handleBlur, true);
     document.addEventListener("click", handleClick, true);
-    console.log("Real-Time Context Extension initialized");
+    console.log("ContextRT Extension initialized");
     const notificationElement = document.createElement("div");
     notificationElement.style.position = "fixed";
     notificationElement.style.bottom = "20px";

@@ -664,7 +664,7 @@ function init() {
   document.addEventListener('blur', handleBlur, true);
   document.addEventListener('click', handleClick, true);
   
-  console.log('Real-Time Context Extension initialized');
+  console.log('ContextRT Extension initialized');
   
   // Add a small notification that disappears quickly
   const notificationElement = document.createElement('div');

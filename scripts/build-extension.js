@@ -50,6 +50,28 @@ try {
     path.join(distDir, 'content.css')
   );
   
+  // Copy dashboard HTML
+  if (fs.existsSync(path.join(extensionDir, 'dashboard.html'))) {
+    fs.copyFileSync(
+      path.join(extensionDir, 'dashboard.html'),
+      path.join(distDir, 'dashboard.html')
+    );
+    console.log('Dashboard HTML copied.');
+  } else {
+    console.log('Warning: dashboard.html not found in extension directory.');
+  }
+  
+  // Copy index HTML
+  if (fs.existsSync(path.join(extensionDir, 'index.html'))) {
+    fs.copyFileSync(
+      path.join(extensionDir, 'index.html'),
+      path.join(distDir, 'index.html')
+    );
+    console.log('Index HTML copied.');
+  } else {
+    console.log('Warning: index.html not found in extension directory.');
+  }
+  
   // Create a simple icon if it doesn't exist
   const iconPath = path.join(extensionDir, 'icon.png');
   if (!fs.existsSync(iconPath)) {
